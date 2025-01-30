@@ -1,0 +1,7 @@
+.success_message {
+  display: block;
+  background-color: rgba(0, 128, 0, 0.403);
+  padding: 5px;
+  font-size: small;
+  transition: 1s;
+}

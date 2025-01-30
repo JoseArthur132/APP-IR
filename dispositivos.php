@@ -3,7 +3,9 @@ require_once(dirname(__FILE__) . "../services/api_functions.php");
 require_once(dirname(__FILE__) . "../services/config.php");
 
 $results = send_request("get_all_dispositivos", "GET");
-
+// echo "<pre>";
+// print_r($results);
+// die(1);
 $dispositivos = $results["data"]["results"];
 
 ?>
@@ -38,16 +40,19 @@ $dispositivos = $results["data"]["results"];
         ?>
             <p>Não há dispositivos registradas</p>
         <?php else: ?>
-            <?php foreach ($dispositivos as $dispositivos): ?>
+            <?php foreach ($dispositivos as $dispositivo): ?>
                 <li>
                     <ul>
                         <li>
-                            Marca: <?= $dispositivos["marca"] ?>
+                            Marca: <?= $dispositivo["marca"] ?>
                         </li>
                         <li>
-                            Tipo: <?= $dispositivos["tipo"] ?>
+                            Tipo: <?= $dispositivo["tipo"] ?>
                         </li>
-                        <a href="#"><button>Deletar</button></a>
+                        <li>
+                            Sala: <?= $dispositivo["sala"] ?>
+                        </li>
+                        <a href="./delete_dispositivo.php?id=<?= $dispositivo["id_dispositivo"] ?>"><button>Deletar</button></a>
                     </ul>
                 </li>
             <?php endforeach; ?>

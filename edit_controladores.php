@@ -7,11 +7,13 @@ $success_message = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $values = [
+        "id" => $_GET["id"],
         "sala" => $_POST["sala"],
         "ip" => $_POST["ip"]
     ];
 
-    $results = send_request("create_new_controlador", "POST", $values);
+    $results = send_request("edit_controlador", "POST", $values);
+
 
     if ($results["data"]["status"] == "ERROR") {
         $error_message = $results["data"]["message"];
@@ -38,23 +40,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php include("./partials/nav.php"); ?>
     <form action="" method="post">
         <div>
-            <label for="isala">sala:</label>
-            <input type="text" name="sala" id="isala">
+            <label for="isala">Sala:</label>
+            <input type="text" name="sala" id="isala" class="text_field">
         </div>
         <div>
             <label for="iIp">IP:</label>
-            <input type="text" name="ip" id="iIp">
+            <input type="text" name="ip" id="iIp" class="text_field">
         </div>
 
-        <input type="submit" value="Salvar">
+        <input type="submit" value="Salvar" class="button">
         <?php if ($error_message): ?>
-            <div class="error_message">
-                <?= $error_message ?>
-            </div>
+        <div class="error_message">
+            <?= $error_message ?>
+        </div>
         <?php elseif ($success_message): ?>
-            <div class="success_message">
-                <?= $success_message ?>
-            </div>
+        <div class="success_message">
+            <?= $success_message ?>
+        </div>
         <?php endif; ?>
     </form>
 

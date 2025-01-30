@@ -10,7 +10,9 @@ header {
   background: linear-gradient(rgb(19, 149, 2), rgb(47, 46, 46));
   margin: 0px;
   padding: 0px;
-  color: rgb(115, 8, 8);
+  color: white;
+  height: 170px;
+  width: 100%;
 }
 
 header > h1 {
@@ -22,5 +24,18 @@ header > h1 {
 header > ul {
   list-style-type: none;
   display: flex;
-  text-align: center;
+  justify-content: space-around;
+}
+
+header > ul > li {
+  padding: 10px;
+  margin: 10px;
+  background-color: rgb(35, 41, 74);
+  border-radius: 10px;
+}
+
+header > ul > li > a {
+  font-weight: 600;
+  color: white;
+  text-decoration: none;
 }

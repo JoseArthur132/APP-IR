@@ -6,12 +6,14 @@ $results = send_request("get_all_controladores", "GET");
 
 $controladores = $results["data"]["results"];
 
-if (isset($_POST["id"])) {
-    $id = ["id" => $_POST["id"]];
-    $results = send_request("delete_controlador", "POST", $id);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $id = $_POST["id"];
+
+    $values = ["id" => $id];
+    $results = send_request("delete_controlador", "POST", $values);
 
     // echo "<pre>";
-    // print_r($results);
+    // print_r($values);
     // die(1);
 }
 ?>
@@ -50,15 +52,17 @@ if (isset($_POST["id"])) {
                 <li>
                     <ul>
                         <li>
-                            Sala:<?= $controlador["sala"] ?>
+                            Sala: <?= $controlador["sala"] ?>
                         </li>
                         <li>
                             IP: <?= $controlador["ip"] ?>
                         </li>
-                        <form action="" method="post">
-                            <input type="hidden" name="id" value=<?= $controlador["id"] ?>>
-                            <input type="submit" value="Deletar">
-                        </form>
+
+                        <a href="./edit_controladores.php?id=<?= $controlador["id_controlador"] ?>"><button>Editar</button></a>
+                        <a href="./delete_controlador.php?id=<?= $controlador["id_controlador"] ?>"><button>Apagar</button></a>
+                        <a href="./enviar_comandos.php?id=<?= $controlador["id_controlador"] ?>"><button>Enviar
+                                comando</button></a>
+
                     </ul>
                 </li>
             <?php endforeach; ?>
