@@ -47,17 +47,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div>
             <label for="itipo">Tipo:</label>
             <select name="tipo" id="itipo">
-                <option value="2">Projetor</option>
-                <option value="1">Ar Condicionado</option>
+                <option value="Projetor">Projetor</option>
+                <option value="Ar-condicionado">Ar Condicionado</option>
             </select>
 
         </div>
         <div>
             <label for="imarca">Marca:</label>
             <select name="marca" id="imarca">
-                <option value="1">EPSON</option>
-                <option value="2">HUTLER</option>
-                <option value="1">Elgin</option>
+                <option value="EPSON">EPSON</option>
+                <option value="HUTLER">HUTLER</option>
+                <option value="Elgin">Elgin</option>
             </select>
         </div>
         <div>
@@ -90,10 +90,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         function handle_tipo() {
             if (TIPO.value == "Projetor") {
-                MARCA.innerHTML = "<option value='1'>EPSON</option>"
+                MARCA.innerHTML = "<option value='EPSON'>EPSON</option>"
             } else if (TIPO.value == "Ar-condicionado") {
-                MARCA.innerHTML = "<option value='1'>Elgin</option>"
-                MARCA.innerHTML = "<option value='2'>HUTLER</option>"
+                MARCA.innerHTML = "<option value='Elgin'>Elgin</option>"
+                MARCA.innerHTML += "<option value='HUTLER'>HUTLER</option>"
             }
         }
 

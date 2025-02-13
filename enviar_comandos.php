@@ -8,13 +8,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $dispositivo = $results["data"]["results"][0];
 
-    $data = [
-        "marca" => $dispositivo["marca"],
-        "tipo" => $dispositivo["tipo"],
-        "comando" => $_GET["comando"]
-    ];
+    if ($dispositivo["marca"] === "EPSON" || $dispositivo["marca"] === "Elgin") {
+        $marca = "01";
+    } else if ($dispositivo["marca"] === "HUTLER") {
+        $marca = "02";
+    }
+
+    if ($dispositivo["tipo"] === "Projetor") {
+        $tipo = "02";
+    } else if ($dispositivo["tipo"] === "Ar-condicionado") {
+        $tipo = "01";
+    }
+
+    if ($_POST["comando"] === "Ligar") {
+        $comando = "01";
+    } else if ($_POST["comando"]  === "Desligar") {
+        $comando = "02";
+    } else if ($_POST["comando"]  === "20") {
+        $comando = "20";
+    } else if ($_POST["comando"]  === "22") {
+        $comando = "22";
+    } else if ($_POST["comando"]  === "25") {
+        $comando = "25";
+    }
+
+    $data = "?" . $marca . "_" . $tipo . "_" . $comando . "!";
 
     send_command($dispositivo["ip"], $data);
+
     header("location: enviar_comandos.php?id=" . $dispositivo["controlador_responsavel"] . "&command_send=true");
     exit;
 } else if ($_SERVER["REQUEST_METHOD"] == "GET") {
@@ -63,11 +84,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <form action="" method="POST">
 
                             <input type="hidden" name="id_dispositivo" value=<?= $dispositivo["id_dispositivo"] ?>>
-
-                            <button value="1" name="comando">Ligar</button>
+                            <?php if ($dispositivo["tipo"] === "Projetor"): ?>
+                                <button value="Ligar" name="comando">Ligar</button>
+                                <button value="Desligar" name="comando">Desligar</button>
+                            <?php elseif ($dispositivo["tipo"] === "Ar-condicionado"): ?>
+                                <button value="Ligar" name="comando">Ligar</button>
+                                <button value="Desligar" name="comando">Desligar</button>
+                                <button value="22" name="comando">Temperatura 22</button>
+                                <button value="20" name="comando">Temperatura 20</button>
+                                <button value="25" name="comando">Temperatura 25</button>
+                            <?php endif; ?>
                         </form>
                     </div>
                 </li>
+
             <?php endforeach; ?>
         </ul>
     <?php else: ?>

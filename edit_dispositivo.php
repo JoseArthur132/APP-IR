@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label for="isala">Sala:</label>
             <select name="sala" id="isala">
                 <?php foreach ($controladores as $controlador): ?>
-                    <option value=<?= $controlador["id_controlador"] ?>><?= $controlador["sala"] ?></option>
+                <option value=<?= $controlador["id_controlador"] ?>><?= $controlador["sala"] ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -72,32 +72,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="submit" value="Salvar">
 
         <?php if ($error_message): ?>
-            <div class="error_message">
-                <?= $error_message ?>
-            </div>
+        <div class="error_message">
+            <?= $error_message ?>
+        </div>
         <?php elseif ($success_message): ?>
-            <div class="success_message">
-                <?= $success_message ?>
-            </div>
+        <div class="success_message">
+            <?= $success_message ?>
+        </div>
         <?php endif; ?>
 
     </form>
 
     <script>
-        const TIPO = document.querySelector("#itipo");
-        const MARCA = document.querySelector("#imarca");
+    const TIPO = document.querySelector("#itipo");
+    const MARCA = document.querySelector("#imarca");
 
-        function handle_tipo() {
-            if (TIPO.value == "Projetor") {
-                MARCA.innerHTML = "<option value='EPSON'>EPSON</option>"
-            } else if (TIPO.value == "Ar-condicionado") {
-                MARCA.innerHTML = "<option value='Elgin'>Elgin</option>"
-            }
+    function handle_tipo() {
+        if (TIPO.value == "Projetor") {
+            MARCA.innerHTML = "<option value='EPSON'>EPSON</option>"
+        } else if (TIPO.value == "Ar-condicionado") {
+            MARCA.innerHTML = "<option value='Elgin'>Elgin</option>"
+            MARCA.innerHTML = "<option value='HUTLER'>HUTLER</option>"
         }
+    }
 
-        handle_tipo()
+    handle_tipo()
 
-        TIPO.addEventListener("click", handle_tipo)
+    TIPO.addEventListener("click", handle_tipo)
     </script>
 </body>
 

@@ -3,9 +3,7 @@ require_once(dirname(__FILE__) . "../services/api_functions.php");
 require_once(dirname(__FILE__) . "../services/config.php");
 
 $results = send_request("get_all_dispositivos", "GET");
-// echo "<pre>";
-// print_r($results);
-// die(1);
+
 $dispositivos = $results["data"]["results"];
 
 ?>
@@ -38,24 +36,25 @@ $dispositivos = $results["data"]["results"];
         <?php
         if (count($dispositivos) == 0):
         ?>
-            <p>Não há dispositivos registradas</p>
+        <p>Não há dispositivos registradas</p>
         <?php else: ?>
-            <?php foreach ($dispositivos as $dispositivo): ?>
+        <?php foreach ($dispositivos as $dispositivo): ?>
+        <li>
+            <ul>
                 <li>
-                    <ul>
-                        <li>
-                            Marca: <?= $dispositivo["marca"] ?>
-                        </li>
-                        <li>
-                            Tipo: <?= $dispositivo["tipo"] ?>
-                        </li>
-                        <li>
-                            Sala: <?= $dispositivo["sala"] ?>
-                        </li>
-                        <a href="./delete_dispositivo.php?id=<?= $dispositivo["id_dispositivo"] ?>"><button>Deletar</button></a>
-                    </ul>
+                    Marca: <b><?= $dispositivo["marca"] ?></b>
                 </li>
-            <?php endforeach; ?>
+                <li>
+                    Tipo: <b><?= $dispositivo["tipo"] ?></b>
+                </li>
+                <li>
+                    Sala: <b><?= $dispositivo["sala"] ?></b>
+                </li>
+                <a href="./delete_dispositivo.php?id=<?= $dispositivo["id_dispositivo"] ?>"><button>Deletar</button></a>
+                <a href="./edit_dispositivo.php?id=<?= $dispositivo["id_dispositivo"] ?>"><button>Editar</button></a>
+            </ul>
+        </li>
+        <?php endforeach; ?>
         <?php endif; ?>
     </ul>
 </body>

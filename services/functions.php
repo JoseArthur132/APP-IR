@@ -5,17 +5,16 @@ function send_command($ip, $data)
 
     curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
 
-    $url = $ip;
+    $url = "http://" . $ip;
 
     if (!empty($data)) {
-        $url .= "&" . http_build_query($data);
+        $url .= $data;
     }
 
-    // if ($method == "POST") {
-    //     $variables = array_merge(["endpoint" => $endpoint], $variables);
+    //POST
 
-    //     curl_setopt($client, CURLOPT_POSTFIELDS, $variables);
-    // }
+    // curl_setopt($client, CURLOPT_POSTFIELDS, $data);
+
     curl_setopt($client, CURLOPT_URL, $url);
 
     $response = curl_exec($client);
